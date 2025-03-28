@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   web:
@@ -17,7 +17,7 @@ services:
       - postgres_password=password
       - postgres_db=mydb
     restart: always
-  
+
   redis:
     image: "redis:alpine"
     ports:
@@ -35,6 +35,14 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     restart: always
-  
+
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: always
+
 volumes:
   db_data:
